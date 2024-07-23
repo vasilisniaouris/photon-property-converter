@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Photon Property Converter</title>
+    <link rel="stylesheet" href="../../base-style.css">
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="property-converters.js"></script>
+    <script type="module">
+        // import { convertLine, convertBandwidth, updateInputUnits} from './property-converters.js';
+
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const button = document.getElementById('convertLineButton');
+        //     button.addEventListener('click', function() {
+        //         convertLine();
+        //     });
+        // });
+        //
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const button = document.getElementById('convertBandwidthButton');
+        //     button.addEventListener('click', function() {
+        //         convertBandwidth();
+        //     });
+        // });
+
+        let inputEntries = ['inputLine', 'inputBandwidth', 'inputMinCenterMax'];
+        for (let entry of inputEntries) {
+            document.addEventListener("DOMContentLoaded", function () {
+                updateInputUnits(entry);
+                document.getElementById(entry + "Type").addEventListener("change", function() {
+                    updateInputUnits(entry);
+                });
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>Photon Property Converter</h1>
+    <div class="container">
+        <h2>Line Conversion</h2>
+        <div>
+            <select id="inputLineType">
+                <option value="wavelength_vacuum">Wavelength (Vacuum)</option>
+                <option value="wavelength_air" selected>Wavelength (Air)</option>
+                <option value="frequency">Frequency</option>
+                <option value="energy">Energy</option>
+                <option value="wave_number_vacuum">Wave Number (Vacuum)</option>
+            </select>
+            <input type="number" id="inputLineValue" placeholder="Enter value">
+            <select id="inputLineUnit"></select>
+            <button id="convertLineButton" onclick="convertLine()">Convert</button>
+        </div>
+        <div>
+            <label for="outputLineUnitWavelengthVacuum">Wavelength (Vacuum):</label>
+            <span id="result-line-wavelength-vacuum"></span>
+            <select id="outputLineUnitWavelengthVacuum" onchange="convertLine()">
+                <option value="pm">pm</option>
+                <option value="nm" selected>nm</option>
+                <option value="um">µm</option>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="m">m</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputLineUnitWavelengthAir">Wavelength (Air):</label>
+            <span id="result-line-wavelength-air"></span>
+            <select id="outputLineUnitWavelengthAir" onchange="convertLine()">
+                <option value="pm">pm</option>
+                <option value="nm" selected>nm</option>
+                <option value="um">µm</option>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="m">m</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputLineUnitFrequency">Frequency:</label>
+            <span id="result-line-frequency"></span>
+            <select id="outputLineUnitFrequency" onchange="convertLine()">
+                <option value="kHz">kHz</option>
+                <option value="MHz">MHz</option>
+                <option value="GHz">GHz</option>
+                <option value="THz" selected>THz</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputLineUnitEnergy">Energy:</label>
+            <span id="result-line-energy"></span>
+            <select id="outputLineUnitEnergy" onchange="convertLine()">
+                <option value="neV">neV</option>
+                <option value="ueV">μeV</option>
+                <option value="meV">meV</option>
+                <option value="eV" selected>eV</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputLineUnitWaveNumberVacuum">Wave Number (Vacuum):</label>
+            <span id="result-line-wave-number-vacuum"></span>
+            <select id="outputLineUnitWaveNumberVacuum" onchange="convertLine()">
+                <option value="1/m">1/m</option>
+                <option value="1/cm" selected>1/cm</option>
+                <option value="1/mm">1/mm</option>
+                <option value="1/um">1/µm</option>
+                <option value="1/nm">1/nm</option>
+                <option value="1/pm">1/pm</option>
+            </select>
+        </div>
+        <div>
+            <label>Refractive Index - 1:</label>
+            <span id="result-line-refractive-index"></span>
+        </div>
+    </div>
+    <div class="container">
+        <h2>Bandwidth Conversion</h2>
+        <div>
+            <label>Bandwidth:</label>
+            <div>
+                <select id="inputBandwidthType">
+                    <option value="wavelength_vacuum">Wavelength (Vacuum)</option>
+                    <option value="wavelength_air" selected>Wavelength (Air)</option>
+                    <option value="frequency">Frequency</option>
+                    <option value="energy">Energy</option>
+                    <option value="wave_number_vacuum">Wave Number (Vacuum)</option>
+                </select>
+                <input type="number" id="inputBandwidthValue" placeholder="Enter value">
+                <select id="inputBandwidthUnit"></select>
+                <button onclick="convertBandwidth()">Convert</button>
+            </div>
+        </div>
+        <div>
+            <!-- <select id="inputMinCenterMax">
+                <option value="min">Minimum</option>
+                <option value="center" selected>Center</option>
+                <option value="max">Maximum</option>
+            </select> -->
+            <label>Center:</label>
+            <div>
+                <select id="inputMinCenterMaxType">
+                    <option value="wavelength_vacuum">Wavelength (Vacuum)</option>
+                    <option value="wavelength_air" selected>Wavelength (Air)</option>
+                    <option value="frequency">Frequency</option>
+                    <option value="energy">Energy</option>
+                    <option value="wave_number_vacuum">Wave Number (Vacuum)</option>
+
+                </select>
+                <input type="number" id="inputMinCenterMaxValue" placeholder="Enter value">
+                <select id="inputMinCenterMaxUnit"></select>
+            </div>
+        </div>
+        <div>
+            <label for="outputBandwidthUnitWavelengthVacuum">Wavelength (Vacuum):</label>
+            <span id="result-bandwidth-wavelength-vacuum"></span>
+            <select id="outputBandwidthUnitWavelengthVacuum" onchange="convertBandwidth()">
+                <option value="pm" selected>pm</option>
+                <option value="nm">nm</option>
+                <option value="um">µm</option>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="m">m</option>
+
+            </select>
+        </div>
+        <div>
+            <label for="outputBandwidthUnitWavelengthAir">Wavelength (Air):</label>
+            <span id="result-bandwidth-wavelength-air"></span>
+            <select id="outputBandwidthUnitWavelengthAir" onchange="convertBandwidth()">
+                <option value="pm" selected>pm</option>
+                <option value="nm">nm</option>
+                <option value="um">µm</option>
+                <option value="mm">mm</option>
+                <option value="cm">cm</option>
+                <option value="m">m</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputBandwidthUnitFrequency">Frequency:</label>
+            <span id="result-bandwidth-frequency"></span>
+            <select id="outputBandwidthUnitFrequency" onchange="convertBandwidth()">
+                <option value="kHz">kHz</option>
+                <option value="MHz" selected>MHz</option>
+                <option value="GHz">GHz</option>
+                <option value="THz">THz</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputBandwidthUnitEnergy">Energy:</label>
+            <span id="result-bandwidth-energy"></span>
+            <select id="outputBandwidthUnitEnergy" onchange="convertBandwidth()">
+                <option value="neV">neV</option>
+                <option value="ueV" selected>μeV</option>
+                <option value="meV">meV</option>
+                <option value="eV">eV</option>
+            </select>
+        </div>
+        <div>
+            <label for="outputBandwidthUnitWaveNumberVacuum">Wave Number (Vacuum):</label>
+            <span id="result-bandwidth-wave-number-vacuum"></span>
+            <select id="outputBandwidthUnitWaveNumberVacuum" onchange="convertBandwidth()">
+                <option value="1/m" selected>1/m</option>
+                <option value="1/cm">1/cm</option>
+                <option value="1/mm">1/mm</option>
+                <option value="1/um">1/µm</option>
+                <option value="1/nm">1/nm</option>
+                <option value="1/pm">1/pm</option>
+            </select>
+        </div>
+        <div>
+            <label>Refractive Index:</label>
+            <span id="result-bandwidth-refractive-index"></span>
+        </div>
+    </div>
+</body>
+</html>

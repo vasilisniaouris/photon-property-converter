@@ -1,0 +1,62 @@
+:root {
+    --container-width: 460px;
+}
+body {
+    min-width: var(--container-width);
+}
+.container {
+    background-color: var(--container-bg);
+    border-radius: 10px;
+    box-shadow: 0.3rem 0.3rem 8px var(--shadow);
+    padding: 20px;
+    width: var(--container-width);
+    margin-bottom: 20px;
+    /* display:inline; */
+    text-align: left;
+}
+input[type="number"] {
+    width: 130px;
+    padding: 3px;
+    margin-bottom: 20px;
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 5px;
+}
+button {
+    background-color: var(--button-bg);
+    color: var(--button-color);
+    border: none;
+    padding: 3px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    /* font-size: 12px; */
+}
+button:hover {
+    background-color: var(--button-hover);
+}
+/* #result {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+} */
+label, #inputLineType, #inputBandwidthType, #inputMinCenterMaxType, #inputMinCenterMax {
+    width: 180px; /* Adjust the value to your desired width */
+    display: inline-flex;
+}
+span {
+    width: 130px; /* Adjust the value to your desired width */
+    padding: 3px;
+    display: inline-flex;
+    text-overflow: ellipsis; /* Adds ellipsis (...) for long text */
+    height: 12px;
+}
+select {
+    width: 60px; /* Adjust the value to your desired width */
+    display: inline-flex;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border: 1px solid var(--input-border);
+    padding: 3px;
+    border-radius: 5px;
+}

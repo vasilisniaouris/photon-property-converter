@@ -1,0 +1,36 @@
+:root {
+    color-scheme: light dark;
+    --bg-color: light-dark(#f0f4f8, #1a1a1a);
+    --container-bg: light-dark(#ffffff, #2c2c2c);
+    --text-color: light-dark(#333333, #e0e0e0);
+    --input-bg: light-dark(#ffffff, #3a3a3a);
+    --input-border: light-dark(#cccccc, #555555);
+    --button-bg: light-dark(#4a90e2, #357abd);
+    --button-color: #ffffff;
+    --button-hover: light-dark(#357abd, #4a90e2);
+    --shadow: light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
+}
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:auto;
+    flex-direction: column;
+    /* box-sizing: border-box; */
+}
+h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    margin-top: 0px;
+    font-weight: 100;
+}
