@@ -87,3 +87,72 @@ export function getMinCenterMax(inputMinCenterMaxValue, inputBandwidthValue, inp
     }
     return [minValue, centerValue, maxValue];
 }
+
+export function camelCaseToDash(str) {
+    return str.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+
+export function dashToCamelCase(str) {
+    return str.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+}
+
+export function underscoreToCamelCase(str) {
+    return str.replace(/_([a-z])/g, function (g) { return g[1].toUpperCase(); });
+}
+
+// export function underscoreToPascalCase(str) {
+//     return str.replace(/(^|_)([a-z])/g, function (g) { return g[1].toUpperCase(); });
+// }
+
+export function underscoreToPascalCase(str) {
+    return str.replace(/(^|_)([a-z])/g, function (match, p1, p2) { return p2.toUpperCase(); });
+}
+
+export function saveData(key, value) {
+    localStorage.setItem(key, value);
+}
+
+export function loadData(key) {
+    return localStorage.getItem(key);
+}
+export function removeData(key) {
+    localStorage.removeItem(key);
+}
+export function clearData() {
+    localStorage.clear();
+}
+
+export function clearPreferencesData(){
+    const materials = loadData('Materials');
+    clearData();
+    if (materials != null) saveData('Materials', materials);
+}
+// export function isDataStored(key) {
+//     return localStorage.getItem(key) !== null;
+// }
+// export function getAllData() {
+//     return localStorage;
+// }
+// export function getAllKeys() {
+//     return Object.keys(localStorage);
+// }
+// export function getAllValues() {
+//     return Object.values(localStorage);
+// }
+// export function getAllEntries() {
+//     return Object.entries(localStorage);
+// }
+
+function toggleTheme() {
+    // Check current theme from localStorage
+    let currentTheme = localStorage.getItem('theme') || 'light';
+
+    // Toggle between light and dark themes
+    if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+    }
+}
