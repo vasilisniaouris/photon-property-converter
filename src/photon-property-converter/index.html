@@ -15,19 +15,21 @@
     </div>
     <div class="container">
         <h2>
-            Materials -- Refractive Index
+            Materials — Refractive Index
             <button class="toggle-btn" data-target="materialsContent">
                 <span class="arrow">▼</span>
             </button>
         </h2>
         <div id="materialsContent">
             <div>
-                Quick value:
-                <input type="checkbox" id="materialSingleTextbox" required>
+                <label class="material-lbl">
+                    Quick value:
+                    <input type="checkbox" id="materialSingleTextbox" required>
+                </label>
                 <input type="number" id="inputSingleRefractiveIndexValue" placeholder="Enter value" value="1">
             </div>
             <div>
-                Select Material:
+                <label class="material-lbl">Select Material:</label>
                 <select id="materialSelect"></select>
                 <button id="addCustomMaterialButton">Add Material</button>
                 <button id="openDeleteMaterialModal">Delete Materials</button>
@@ -57,6 +59,10 @@
                 <label for="outputLineUnitWavelengthMaterial">Wavelength (Material):</label>
                 <span id="result-line-wavelength-material"></span>
                 <select id="outputLineUnitWavelengthMaterial"></select>
+                <div class="alert-container" id="lineAlert">
+                    <span class="alert-icon">&#9888;</span>
+                    <div class="tooltip" id="lineAlertTooltip">This is the hover message</div>
+                </div>
             </div>
             <div>
                 <label for="outputLineUnitFrequency">Frequency:</label>
@@ -118,6 +124,10 @@
                 <label for="outputBandwidthUnitWavelengthMaterial">Wavelength (Material):</label>
                 <span id="result-bandwidth-wavelength-material"></span>
                 <select id="outputBandwidthUnitWavelengthMaterial"></select>
+                <div class="alert-container" id="bandwidthAlert">
+                    <span class="alert-icon">&#9888;</span>
+                    <div class="tooltip" id="bandwidthAlertTooltip">This is the hover message</div>
+                </div>
             </div>
             <div>
                 <label for="outputBandwidthUnitFrequency">Frequency:</label>

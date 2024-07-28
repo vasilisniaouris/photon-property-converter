@@ -1,4 +1,10 @@
-import {defaultPropertyType, defaultPropertyUnits, propertyTypes, propertyUnits} from "./spectroscopy.js";
+import {
+    defaultPropertyType,
+    defaultPropertyUnits,
+    getAllPropertyValues,
+    propertyTypes,
+    propertyUnits
+} from "./spectroscopy.js";
 import {camelCaseToDash, clearData, clearPreferencesData, loadData, saveData, underscoreToPascalCase} from "./utils.js";
 import {convertLine, convertBandwidth} from "./property-converters.js";
 import {
@@ -15,6 +21,7 @@ import {
     toggleInputType, updateCSVWavelengthUnits,
     updateMaterialSelect
 } from "./material-selection.js";
+import {convertFromMeters, convertToMeters} from "./unit-conversion.js";
 
 export function updateInputUnits(entry) {
 
@@ -132,12 +139,64 @@ function toggleSection(sectionId) {
     }
 }
 
+function setRefractiveAlertMessage(minWave, maxWave, type) {
+    document.getElementById(`${type}AlertTooltip`).innerHTML =
+        `Warning: Using linearly extrapolated ref. index.<br>Valid vac. range: ${minWave}-${maxWave} nm`;
+}
+
+function checkRefractiveIndexAlert(type) {
+    if (window.refractiveIndexData.entryType === 'constant') {
+        document.getElementById(type+'Alert').style.display = 'none';
+        return;
+    }
+    const minWavelength = window.refractiveIndexData.wavelengthVacuumNanometers[0];
+    const maxWavelength = window.refractiveIndexData.wavelengthVacuumNanometers[
+        window.refractiveIndexData.wavelengthVacuumNanometers.length - 1];
+    setRefractiveAlertMessage(minWavelength, maxWavelength, type);
+    let resultMinWavelength, resultMaxWavelength;
+
+    if (type === 'line') {
+        resultMinWavelength = parseFloat(document.getElementById('result-line-wavelength-vacuum').textContent);
+        const resultUnit = document.getElementById('outputLineUnitWavelengthVacuum').value;
+        resultMinWavelength = convertFromMeters(convertToMeters(resultMinWavelength, resultUnit), 'nm');
+        resultMaxWavelength = resultMinWavelength;
+    } else {
+        const inputValue = parseFloat(document.getElementById("inputMinCenterMaxValue").value);
+        const inputType = document.getElementById("inputMinCenterMaxType").value;
+        const inputUnit = document.getElementById("inputMinCenterMaxUnit").value;
+
+        const wavelength = getAllPropertyValues(inputValue, inputType, inputUnit)[0];
+
+        const wavelengthBandwidthUnit = document.getElementById('outputBandwidthUnitWavelengthVacuum').value;
+        let wavelengthBandwidth = parseFloat(document.getElementById('result-bandwidth-wavelength-vacuum').textContent);
+        wavelengthBandwidth = convertToMeters(wavelengthBandwidth, wavelengthBandwidthUnit);
+
+        console.log(wavelength, wavelengthBandwidth);
+        resultMaxWavelength = wavelength + wavelengthBandwidth / 2;
+        resultMinWavelength = wavelength - wavelengthBandwidth / 2;
+        resultMinWavelength = convertFromMeters(resultMinWavelength, 'nm');
+        resultMaxWavelength = convertFromMeters(resultMaxWavelength, 'nm');
+
+    }
+    if (resultMinWavelength < minWavelength || resultMaxWavelength > maxWavelength) {
+        document.getElementById(type + 'Alert').style.display = 'inline-block';
+    } else {
+        document.getElementById(type + 'Alert').style.display = 'none';
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const convertLineButton = document.getElementById('convertLineButton');
-    convertLineButton.addEventListener('click', convertLine);
+    convertLineButton.addEventListener('click', function (){
+        convertLine();
+        checkRefractiveIndexAlert('line');
+    });
 
     const convertBandwidthButton = document.getElementById('convertBandwidthButton');
-    convertBandwidthButton.addEventListener('click', convertBandwidth);
+    convertBandwidthButton.addEventListener('click', function () {
+        convertBandwidth();
+        checkRefractiveIndexAlert('bandwidth');
+    });
 
     const clearPreferencesButton = document.getElementById('clearPreferencesButton');
     clearPreferencesButton.addEventListener('click', clearPreferencesData);
