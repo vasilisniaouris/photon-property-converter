@@ -51,7 +51,7 @@ label,
     width: 180px; /* Adjust the value to your desired width */
     display: inline-flex;
 }
-span {
+.result-span {
     width: 130px; /* Adjust the value to your desired width */
     padding: 3px;
     display: inline-flex;

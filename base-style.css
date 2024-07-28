@@ -34,3 +34,21 @@ h2 {
     margin-top: 0px;
     font-weight: 100;
 }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid var(--text-color);
+    text-align: center;
+    padding: 8px;
+}
+
+table td:hover {
+    background-color: var(--shadow);
+}
+
+table tr:hover > td:first-child {
+    background-color: var(--shadow);
+}

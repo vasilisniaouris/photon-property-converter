@@ -52,12 +52,12 @@
             </div>
             <div>
                 <label for="outputLineUnitWavelengthVacuum">Wavelength (Vacuum):</label>
-                <span id="result-line-wavelength-vacuum"></span>
+                <span class="result-span" id="result-line-wavelength-vacuum"></span>
                 <select id="outputLineUnitWavelengthVacuum"></select>
             </div>
             <div>
                 <label for="outputLineUnitWavelengthMaterial">Wavelength (Material):</label>
-                <span id="result-line-wavelength-material"></span>
+                <span class="result-span" id="result-line-wavelength-material"></span>
                 <select id="outputLineUnitWavelengthMaterial"></select>
                 <div class="alert-container" id="lineAlert">
                     <span class="alert-icon">&#9888;</span>
@@ -66,22 +66,22 @@
             </div>
             <div>
                 <label for="outputLineUnitFrequency">Frequency:</label>
-                <span id="result-line-frequency"></span>
+                <span class="result-span" id="result-line-frequency"></span>
                 <select id="outputLineUnitFrequency"></select>
             </div>
             <div>
                 <label for="outputLineUnitEnergy">Energy:</label>
-                <span id="result-line-energy"></span>
+                <span class="result-span" id="result-line-energy"></span>
                 <select id="outputLineUnitEnergy"></select>
             </div>
             <div>
                 <label for="outputLineUnitWaveNumberVacuum">Wave Number (Vacuum):</label>
-                <span id="result-line-wave-number-vacuum"></span>
+                <span class="result-span" id="result-line-wave-number-vacuum"></span>
                 <select id="outputLineUnitWaveNumberVacuum"></select>
             </div>
             <div>
                 <label>Refractive Index - 1:</label>
-                <span id="result-line-refractive-index"></span>
+                <span class="result-span" id="result-line-refractive-index"></span>
             </div>
         </div>
     </div>
@@ -117,12 +117,12 @@
             </div>
             <div>
                 <label for="outputBandwidthUnitWavelengthVacuum">Wavelength (Vacuum):</label>
-                <span id="result-bandwidth-wavelength-vacuum"></span>
+                <span class="result-span" id="result-bandwidth-wavelength-vacuum"></span>
                 <select id="outputBandwidthUnitWavelengthVacuum"></select>
             </div>
             <div>
                 <label for="outputBandwidthUnitWavelengthMaterial">Wavelength (Material):</label>
-                <span id="result-bandwidth-wavelength-material"></span>
+                <span class="result-span" id="result-bandwidth-wavelength-material"></span>
                 <select id="outputBandwidthUnitWavelengthMaterial"></select>
                 <div class="alert-container" id="bandwidthAlert">
                     <span class="alert-icon">&#9888;</span>
@@ -131,26 +131,41 @@
             </div>
             <div>
                 <label for="outputBandwidthUnitFrequency">Frequency:</label>
-                <span id="result-bandwidth-frequency"></span>
+                <span class="result-span" id="result-bandwidth-frequency"></span>
                 <select id="outputBandwidthUnitFrequency"></select>
             </div>
             <div>
                 <label for="outputBandwidthUnitEnergy">Energy:</label>
-                <span id="result-bandwidth-energy"></span>
+                <span class="result-span" id="result-bandwidth-energy"></span>
                 <select id="outputBandwidthUnitEnergy"></select>
             </div>
             <div>
                 <label for="outputBandwidthUnitWaveNumberVacuum">Wave Number (Vacuum):</label>
-                <span id="result-bandwidth-wave-number-vacuum"></span>
+                <span class="result-span" id="result-bandwidth-wave-number-vacuum"></span>
                 <select id="outputBandwidthUnitWaveNumberVacuum"></select>
             </div>
             <div>
                 <label>Refractive Index:</label>
-                <span id="result-bandwidth-refractive-index"></span>
+                <span class="result-span" id="result-bandwidth-refractive-index"></span>
             </div>
         </div>
     </div>
+    <div class="container">
+        <h2>
+            Conversion Equations
+            <button class="toggle-btn" data-target="ConversionEquationsContent">
+                <span class="arrow">▼</span>
+            </button>
+        </h2>
+        <div id="ConversionEquationsContent"></div>
 
+        <script src="../md-utils.js"></script>
+        <script>
+            window.onload = function() {
+                initMarkdownEquations('./conversion-math.md', 'ConversionEquationsContent');
+            };
+        </script>
+    </div>
     <div id="customMaterialModal" class="modal">
         <div class="modal-content">
             <h2>Add Material</h2>
