@@ -72,10 +72,10 @@ select {
 }
 
 #materialSelect  {
-    width: 125px;
+    width: 120px;
 }
 #inputSingleRefractiveIndexValue {
-    width: 117px;
+    width: 112px;
 }
 
 #clearPreferencesButton, #toggleThemeButton {
