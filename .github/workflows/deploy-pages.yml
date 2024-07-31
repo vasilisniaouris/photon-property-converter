@@ -26,10 +26,20 @@ jobs:
     - name: Generate logo files
       run: python logo_generator.py
 
-    # If you need to build your site, add build steps here
+    - name: List files
+      run: ls -la
+
+    - name: Debug Git status
+      run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        git status
+        git remote -v
 
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: .
+        force_orphan: true
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'

@@ -81,3 +81,13 @@ if os.path.exists(logo_png_path):
     print(f"{logo_png_path} has been deleted.")
 else:
     print(f"{logo_png_path} does not exist.")
+
+if os.path.exists(logo_svg_path):
+    print(f"{logo_svg_path} has been successfully created.")
+else:
+    print(f"{logo_svg_path} does not exist.")
+
+if os.path.exists(logo_ico_path):
+    print(f"{logo_ico_path} has been successfully created.")
+else:
+    print(f"{logo_ico_path} does not exist.")
