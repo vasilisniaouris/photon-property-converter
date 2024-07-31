@@ -9,6 +9,8 @@
     --button-color: #ffffff;
     --button-hover: light-dark(#357abd, #4a90e2);
     --shadow: light-dark(rgba(0, 0, 0, 0.2), rgba(255, 255, 255, 0.2));
+    --h1-size: 30px;
+    --logo-size: 34px;
 }
 body {
     font-family: Arial, sans-serif;
@@ -24,9 +26,16 @@ body {
     /* box-sizing: border-box; */
 }
 h1 {
-    font-size: 30px;
+    font-size: var(--h1-size);
     margin-bottom: 20px;
     margin-top: 0px;
+}
+.logo-img {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    margin-top: 0px;
+    margin-bottom: 0px;
+    vertical-align: text-bottom;
 }
 h2 {
     font-size: 24px;
